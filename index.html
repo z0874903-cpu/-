@@ -115,6 +115,18 @@
             transform: translateX(50%);
         }
 
+        html[dir="rtl"] .form-row {
+            flex-direction: row-reverse;
+        }
+
+        html[dir="rtl"] .submit-btn {
+            flex-direction: row-reverse;
+        }
+
+        html[dir="rtl"] .social-links {
+            flex-direction: row-reverse;
+        }
+
         /* Language Toggle */
         .lang-toggle {
             background: rgba(255,255,255,0.1);
@@ -169,13 +181,18 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 800;
             color: var(--text-light);
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+        }
+
+        .logo i {
+            color: var(--accent-gold);
+            font-size: 1.8rem;
         }
 
         .logo span {
@@ -229,7 +246,7 @@
             cursor: pointer;
         }
 
-        /* Hero Section - Updated with Emerald gradients */
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 50%, #064e3b 100%);
@@ -274,7 +291,7 @@
         }
 
         .hero-text h1 {
-            font-size: 3.2rem;
+            font-size: 3rem;
             font-weight: 800;
             color: var(--text-light);
             line-height: 1.3;
@@ -287,7 +304,7 @@
         }
 
         .hero-text p {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             color: rgba(255,255,255,0.8);
             margin-bottom: 2rem;
             line-height: 1.8;
@@ -406,8 +423,12 @@
             font-weight: 800;
             transition: var(--transition);
             border: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            cursor: pointer;
+            font-size: 1rem;
         }
 
         .btn-primary:hover {
@@ -424,7 +445,11 @@
             font-weight: 600;
             border: 2px solid rgba(255,255,255,0.4);
             transition: var(--transition);
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
         }
 
         .btn-secondary:hover {
@@ -476,7 +501,7 @@
             margin: 1.5rem auto 0;
         }
 
-        /* Services Section - Updated with Emerald accents */
+        /* Services Section */
         .services {
             background: var(--bg-light);
         }
@@ -748,12 +773,38 @@
             font-size: 0.95rem;
         }
 
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #25D366;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 1rem;
+            transition: var(--transition);
+            border: 2px solid #25D366;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
         .contact-form {
             background: white;
             padding: 3rem;
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.05);
             border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
         }
 
         .form-group {
@@ -818,13 +869,33 @@
             gap: 0.5rem;
         }
 
-        html[dir="rtl"] .submit-btn {
-            flex-direction: row-reverse;
-        }
-
         .submit-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(5, 150, 105, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, var(--emerald), var(--emerald-light));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: 600;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Footer */
@@ -863,10 +934,6 @@
         .social-links {
             display: flex;
             gap: 1rem;
-        }
-
-        html[dir="rtl"] .social-links {
-            flex-direction: row-reverse;
         }
 
         .social-links a {
@@ -983,6 +1050,10 @@
                 margin-left: auto;
                 margin-right: 1rem;
             }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 640px) {
@@ -1050,6 +1121,29 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Spinner for form submission */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .submit-btn.loading .spinner {
+            display: inline-block;
+        }
+
+        .submit-btn.loading .btn-text {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -1058,8 +1152,9 @@
     <nav id="navbar">
         <div class="nav-container">
             <a href="#" class="logo">
-                <i class="fas fa-crown"></i>
-<span data-en="Ufuq Aljamal" data-ar="أفق الجمال">Ufuq Aljamal</span> <span data-en="Almutaqadimah" data-ar="المتقدمة">Almutaqadimah</span>            </a>
+                <i class="fas fa-star-and-crescent"></i>
+                <span data-en="Ufuq Aljamal" data-ar="أفق الجمال">Ufuq Aljamal</span> <span data-en="Almutaqadimah" data-ar="المتقدمة">Almutaqadimah</span>
+            </a>
             
             <ul class="nav-links">
                 <li><a href="#home" data-en="Home" data-ar="الرئيسية">Home</a></li>
@@ -1100,11 +1195,16 @@
                 
                 <div class="cta-buttons">
                     <a href="#services" class="btn-primary" data-en="Explore Services" data-ar="استكشف الخدمات">Explore Services</a>
-                    <a href="#contact" class="btn-secondary" data-en="Get in Touch" data-ar="تواصل معنا">Get in Touch</a>
+                    <a href="https://wa.me/966500000000" target="_blank" class="btn-secondary" data-en="WhatsApp Us" data-ar="تواصل عبر واتساب">
+                        <i class="fab fa-whatsapp"></i> <span data-en="WhatsApp Us" data-ar="تواصل عبر واتساب">WhatsApp Us</span>
+                    </a>
                 </div>
 
                 <div class="hero-stats">
-                    
+                    <div class="stat-item">
+                        <h3>500+</h3>
+                        <p data-en="Projects Delivered" data-ar="مشروع منجز">Projects Delivered</p>
+                    </div>
                     <div class="stat-item">
                         <h3>98%</h3>
                         <p data-en="Client Satisfaction" data-ar="رضا العملاء">Client Satisfaction</p>
@@ -1247,7 +1347,7 @@
             <div class="about-content">
                 <div class="about-text fade-up">
                     <h2 data-en="Your Trusted Partner for Digital Excellence" data-ar="شريكك الموثوق للتميز الرقمي">
-                        Your Trusted Partner for <span data-en="Digital Excellence" data-ar="التميز الرقمي">Digital Excellence</span>
+                        Your Trusted Partner For <span data-en="Digital Excellence" data-ar="التميز الرقمي">Digital Excellence</span>
                     </h2>
                     <p data-en="We are a leading digital solutions provider based in Saudi Arabia, dedicated to transforming businesses through innovative technology and strategic consulting. Our team of experts combines local market knowledge with global best practices."
                        data-ar="نحن مزود رائد للحلول الرقمية مقره المملكة العربية السعودية، مكرس لتحويل الأعمال من خلال التكنولوجيا المبتكرة والاستشارات الاستراتيجية. يجمع فريق الخبراء لدينا المعرفة المحلية بالسوق مع أفضل الممارسات العالمية.">
@@ -1273,7 +1373,10 @@
                             <i class="fas fa-award" style="font-size: 5rem; color: var(--accent-gold); opacity: 0.9;"></i>
                         </div>
                     </div>
-                  
+                    <div class="experience-badge">
+                        <span class="years">5+</span>
+                        <span class="text" data-en="Years of Excellence" data-ar="سنوات من التميز">Years of<br>Excellence</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1292,10 +1395,10 @@
 
             <div class="contact-content">
                 <div class="contact-info fade-up">
-                    <h3 data-en="Let's Discuss Your Project" data-ar="دعنا نناقش مشروعك">Let's Discuss Your Project</h3>
-                    <p data-en="Whether you need a new website, mobile app, or business consultancy, our team is ready to provide tailored solutions that meet your specific requirements and budget."
-                       data-ar="سواء كنت بحاجة إلى موقع جديد أو تطبيق جوال أو استشارات تجارية، فريقنا مستعد لتقديم حلول مخصصة تلبي متطلباتك وميزانيتك الخاصة.">
-                       Whether you need a new website, mobile app, or business consultancy, our team is ready to provide tailored solutions that meet your specific requirements and budget.
+                    <h3 data-en="Contact Information" data-ar="معلومات التواصل">Contact Information</h3>
+                    <p data-en="Fill out the form and our team will get back to you within 24 hours. For immediate assistance, reach us via WhatsApp or phone."
+                       data-ar="املأ النموذج وسيتواصل فريقنا معك خلال 24 ساعة. للحصول على مساعدة فورية، تواصل معنا عبر الواتساب أو الهاتف.">
+                       Fill out the form and our team will get back to you within 24 hours. For immediate assistance, reach us via WhatsApp or phone.
                     </p>
                     
                     <div class="contact-details">
@@ -1321,8 +1424,8 @@
                             <i class="fas fa-envelope"></i>
                             <div>
                                 <h4 data-en="Email Address" data-ar="البريد الإلكتروني">Email Address</h4>
-                                <p>info@royalsolutions.sa</p>
-                                <p>support@royalsolutions.sa</p>
+                                <p>info@ufuqaljamal.sa</p>
+                                <p>support@ufuqaljamal.sa</p>
                             </div>
                         </div>
                         
@@ -1331,50 +1434,68 @@
                             <div>
                                 <h4 data-en="Working Hours" data-ar="ساعات العمل">Working Hours</h4>
                                 <p data-en="Sun - Thu: 9:00 AM - 6:00 PM" data-ar="الأحد - الخميس: 9:00 ص - 6:00 م">Sun - Thu: 9:00 AM - 6:00 PM</p>
+                                <p data-en="24/7 Emergency Support" data-ar="دعم الطوارئ على مدار الساعة">24/7 Emergency Support</p>
                             </div>
                         </div>
                     </div>
+
+                    <a href="https://wa.me/966500000000" target="_blank" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> <span data-en="Chat on WhatsApp" data-ar="دردشة على الواتساب">Chat on WhatsApp</span>
+                    </a>
                 </div>
 
                 <div class="contact-form fade-up">
-                    <form onsubmit="handleSubmit(event)">
-                        <div class="form-group">
-                            <label for="name" data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
-                            <input type="text" id="name" data-placeholder-en="Your full name" data-placeholder-ar="اسمك الكامل" placeholder="Your full name" required>
+                    <form id="contactForm" action="https://formspree.io/f/xjgowvvn" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name" data-en="Full Name *" data-ar="الاسم الكامل *">Full Name *</label>
+                                <input type="text" id="name" name="name" data-placeholder-en="Your full name" data-placeholder-ar="اسمك الكامل" placeholder="Your full name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone" data-en="Phone Number *" data-ar="رقم الجوال *">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" data-placeholder-en="+966 XX XXX XXXX" data-placeholder-ar="XXX XXX XX 966+" placeholder="+966 XX XXX XXXX" required>
+                            </div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="email" data-en="Email Address" data-ar="البريد الإلكتروني">Email Address</label>
-                            <input type="email" id="email" data-placeholder-en="your@email.com" data-placeholder-ar="بريدك@الإلكتروني.com" placeholder="your@email.com" required>
+                            <label for="email" data-en="Email Address *" data-ar="البريد الإلكتروني *">Email Address *</label>
+                            <input type="email" id="email" name="email" data-placeholder-en="your@email.com" data-placeholder-ar="بريدك@الإلكتروني.com" placeholder="your@email.com" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="phone" data-en="Phone Number" data-ar="رقم الجوال">Phone Number</label>
-                            <input type="tel" id="phone" data-placeholder-en="+966 XX XXX XXXX" data-placeholder-ar="+966 XX XXX XXXX" placeholder="+966 XX XXX XXXX" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="service" data-en="Service Interested In" data-ar="الخدمة المطلوبة">Service Interested In</label>
-                            <select id="service" required>
+                            <label for="service" data-en="Service Interested In *" data-ar="الخدمة المطلوبة *">Service Interested In *</label>
+                            <select id="service" name="service" required>
                                 <option value="" data-en="Select a service" data-ar="اختر خدمة">Select a service</option>
-                                <option value="web" data-en="Web Development" data-ar="تطوير الويب">Web Development</option>
-                                <option value="graphic" data-en="Graphic Design" data-ar="التصميم الجرافيكي">Graphic Design</option>
-                                <option value="app" data-en="App Development" data-ar="تطوير التطبيقات">App Development</option>
-                                <option value="marketing" data-en="Digital Marketing" data-ar="التسويق الرقمي">Digital Marketing</option>
-                                <option value="startup" data-en="Business Startup Support" data-ar="دعم تأسيس الأعمال">Business Startup Support</option>
-                                <option value="hotel" data-en="Hotel Booking Services" data-ar="خدمات حجز الفنادق">Hotel Booking Services</option>
+                                <option value="Web Development" data-en="Web Development" data-ar="تطوير الويب">Web Development</option>
+                                <option value="Graphic Design" data-en="Graphic Design" data-ar="التصميم الجرافيكي">Graphic Design</option>
+                                <option value="App Development" data-en="App Development" data-ar="تطوير التطبيقات">App Development</option>
+                                <option value="Digital Marketing" data-en="Digital Marketing" data-ar="التسويق الرقمي">Digital Marketing</option>
+                                <option value="Business Startup Support" data-en="Business Startup Support" data-ar="دعم تأسيس الأعمال">Business Startup Support</option>
+                                <option value="Hotel Booking Services" data-en="Hotel Booking Services" data-ar="خدمات حجز الفنادق">Hotel Booking Services</option>
                             </select>
                         </div>
                         
                         <div class="form-group">
-                            <label for="message" data-en="Your Message" data-ar="رسالتك">Your Message</label>
-                            <textarea id="message" data-placeholder-en="Tell us about your project requirements..." data-placeholder-ar="أخبرنا عن متطلبات مشروعك..." placeholder="Tell us about your project requirements..." required></textarea>
+                            <label for="message" data-en="Your Message *" data-ar="رسالتك *">Your Message *</label>
+                            <textarea id="message" name="message" data-placeholder-en="Tell us about your project requirements..." data-placeholder-ar="أخبرنا عن متطلبات مشروعك..." placeholder="Tell us about your project requirements..." required></textarea>
                         </div>
+
+                        <!-- Hidden field for Formspree to capture page language -->
+                        <input type="hidden" name="language" id="formLanguage" value="en">
                         
-                        <button type="submit" class="submit-btn">
-                            <span data-en="Send Message" data-ar="إرسال الرسالة">Send Message</span> <i class="fas fa-paper-plane"></i>
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <span class="btn-text" data-en="Send Message" data-ar="إرسال الرسالة">Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                            <div class="spinner"></div>
                         </button>
+
+                        <div id="successMessage" class="success-message" style="display: none;">
+                            <i class="fas fa-check-circle"></i> <span data-en="Thank you! Your message has been sent successfully. We will contact you soon." data-ar="شكراً لك! تم إرسال رسالتك بنجاح. سنتواصل معك قريباً.">Thank you! Your message has been sent successfully. We will contact you soon.</span>
+                        </div>
                     </form>
+
+                   
                 </div>
             </div>
         </div>
@@ -1384,15 +1505,16 @@
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
-<h3><span data-en="Ufuq Aljamal" data-ar="أفق الجمال">Ufuq Aljamal</span> <span data-en="Almutaqadimah" data-ar="المتقدمة">Almutaqadimah</span></h3>                <p data-en="Your comprehensive partner for digital transformation, business consultancy, and travel services in Saudi Arabia. Building success stories since 2019."
-                   data-ar="شريكك الشامل للتحول الرقمي والاستشارات التجارية وخدمات السفر في المملكة العربية السعودية. .">
+                <h3><span data-en="Ufuq Aljamal" data-ar="أفق الجمال">Ufuq Aljamal</span> <span data-en="Almutaqadimah" data-ar="المتقدمة">Almutaqadimah</span></h3>
+                <p data-en="Your comprehensive partner for digital transformation, business consultancy, and travel services in Saudi Arabia. "
+                   data-ar="شريكك الشامل للتحول الرقمي والاستشارات التجارية وخدمات السفر في المملكة العربية السعودية.">
                    Your comprehensive partner for digital transformation, business consultancy, and travel services in Saudi Arabia. 
                 </p>
                 <div class="social-links">
                     <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                     <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://wa.me/966500000000" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
             
@@ -1428,7 +1550,8 @@
         </div>
         
         <div class="footer-bottom">
-<p>&copy; 2026 <span data-en="Ufuq Aljamal Almutaqadimah" data-ar="أفق الجمال المتقدمة">Ufuq Aljamal Almutaqadimah</span>. <span data-en="All rights reserved" data-ar="جميع الحقوق محفوظة">All rights reserved</span>.</p>        </div>
+            <p>&copy; 2026 <span data-en="Ufuq Aljamal Almutaqadimah" data-ar="أفق الجمال المتقدمة">Ufuq Aljamal Almutaqadimah</span>. <span data-en="All rights reserved" data-ar="جميع الحقوق محفوظة">All rights reserved</span>.</p>
+        </div>
     </footer>
 
     <script>
@@ -1439,13 +1562,11 @@
             en: {
                 dir: 'ltr',
                 lang: 'en',
-                flag: '🇸🇦',
                 switchText: 'العربية'
             },
             ar: {
                 dir: 'rtl',
                 lang: 'ar',
-                flag: '🇬🇧',
                 switchText: 'English'
             }
         };
@@ -1463,10 +1584,13 @@
             html.dir = langData.dir;
             html.lang = langData.lang;
             
+            // Update hidden form field
+            const formLang = document.getElementById('formLanguage');
+            if (formLang) formLang.value = currentLang;
+            
             // Update all elements with data-en and data-ar attributes
             const elements = document.querySelectorAll('[data-en][data-ar]');
             elements.forEach(el => {
-                // Add fade animation
                 el.style.opacity = '0';
                 setTimeout(() => {
                     if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
@@ -1487,6 +1611,7 @@
             // Handle select options
             const select = document.getElementById('service');
             if (select) {
+                const currentValue = select.value;
                 const options = select.querySelectorAll('option');
                 options.forEach(option => {
                     if (option.value) {
@@ -1495,6 +1620,7 @@
                         option.textContent = option.getAttribute(`data-${currentLang}`);
                     }
                 });
+                select.value = currentValue;
             }
             
             // Store preference
@@ -1508,16 +1634,59 @@
                 currentLang = savedLang;
                 updateLanguage();
             }
+            
+            // Setup form handling
+            setupFormHandling();
         });
 
-        // Form submission handler
-        function handleSubmit(e) {
-            e.preventDefault();
-            const message = currentLang === 'en' ? 
-                'Thank you for your message! We will contact you soon.' : 
-                'شكراً لرسالتك! سنتواصل معك قريباً.';
-            alert(message);
-            e.target.reset();
+        // Form Handling with Formspree
+        function setupFormHandling() {
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const successMsg = document.getElementById('successMessage');
+            
+            if (form) {
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Show loading state
+                    submitBtn.classList.add('loading');
+                    submitBtn.disabled = true;
+                    
+                    const formData = new FormData(form);
+                    
+                    try {
+                        const response = await fetch(form.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+                        
+                        if (response.ok) {
+                            // Show success message
+                            form.reset();
+                            successMsg.style.display = 'block';
+                            successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                            
+                            // Hide success message after 5 seconds
+                            setTimeout(() => {
+                                successMsg.style.display = 'none';
+                            }, 5000);
+                        } else {
+                            throw new Error('Form submission failed');
+                        }
+                    } catch (error) {
+                        alert(currentLang === 'en' ? 
+                            'There was a problem sending your message. Please try again or contact us directly via WhatsApp.' : 
+                            'حدثت مشكلة في إرسال رسالتك. يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة عبر الواتساب.');
+                    } finally {
+                        submitBtn.classList.remove('loading');
+                        submitBtn.disabled = false;
+                    }
+                });
+            }
         }
 
         // Navbar scroll effect
@@ -1568,28 +1737,25 @@
         const mobileMenu = document.querySelector('.mobile-menu');
         const navLinks = document.querySelector('.nav-links');
         
-        mobileMenu.addEventListener('click', () => {
-            const isActive = navLinks.style.display === 'flex';
-            navLinks.style.display = isActive ? 'none' : 'flex';
-            
-            if (!isActive) {
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '100%';
-                navLinks.style.left = '0';
-                navLinks.style.right = '0';
-                navLinks.style.background = 'var(--primary-dark)';
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.padding = '2rem';
-                navLinks.style.gap = '1.5rem';
-                navLinks.style.borderTop = '1px solid var(--border-color)';
-                navLinks.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+        if (mobileMenu) {
+            mobileMenu.addEventListener('click', () => {
+                const isActive = navLinks.style.display === 'flex';
+                navLinks.style.display = isActive ? 'none' : 'flex';
                 
-                // Show mobile lang toggle inside menu when open
-                const mobileLang = document.querySelector('.mobile-lang');
-                if (mobileLang) mobileLang.style.display = 'flex';
-            }
-        });
+                if (!isActive) {
+                    navLinks.style.position = 'absolute';
+                    navLinks.style.top = '100%';
+                    navLinks.style.left = '0';
+                    navLinks.style.right = '0';
+                    navLinks.style.background = 'var(--primary-dark)';
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.padding = '2rem';
+                    navLinks.style.gap = '1.5rem';
+                    navLinks.style.borderTop = '1px solid var(--border-color)';
+                    navLinks.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+                }
+            });
+        }
     </script>
 </body>
-
 </html>
